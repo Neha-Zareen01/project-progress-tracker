@@ -1,5 +1,16 @@
 <h2>Progress Notes</h2>
 <form [formGroup]="progressNotesForm">
+  <label for="projectCode">Project Code</label>
+  <input id="projectCode" type="text" formControlName="projectCode" list="projectCodeList" placeholder="e.g. WEB202" (blur)="onProjectCodeChange()" />
+  <datalist id="projectCodeList">
+    @for (code of codeList; track code) {
+      <option [value]="code"></option>
+    }
+  </datalist>
+  @if (codeNotFound) {
+    <p class="error">Project code not found.</p>
+  }
+
   <label for="projectName">Project Name</label>
   <input id="projectName" type="text" formControlName="projectName" />
 
