@@ -16,7 +16,7 @@ h2 {
   margin: 0 0 8px 0;
 }
 
-app-milestone-tracker,
+  app-milestone-tracker,app-milestone-api,
 app-progress-notes {
   display: block;
   max-width: 560px;
