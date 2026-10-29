@@ -1,0 +1,19 @@
+<h2>Project Progress Tracker - MongoDB</h2>
+
+<a routerLink="/projects/new">Add New Project</a>
+
+@for (project of projects; track project._id) {
+  <div class="project-card">
+    <h3>{{ project.projectName }}</h3>
+    <p><strong>Description:</strong> {{ project.description }}</p>
+    <p><strong>Start Date:</strong> {{ project.startDate }}</p>
+    <p><strong>Status:</strong> {{ project.status }}</p>
+    <p><strong>Team Member:</strong> {{ project.teamMember }}</p>
+    <p><strong>Progress Note:</strong> {{ project.progressNote }}</p>
+
+    <button [routerLink]="['/projects/edit', project._id]">Edit</button>
+    <button (click)="onDelete(project._id)">Delete</button>
+  </div>
+} @empty {
+  <p>No projects found.</p>
+}

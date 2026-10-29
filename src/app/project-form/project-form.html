@@ -1,0 +1,41 @@
+<h2>{{ projectId ? 'Edit Project' : 'Add New Project' }}</h2>
+
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+  <label>
+    Project Name
+    <input type="text" formControlName="projectName" required />
+  </label>
+
+  <label>
+    Description
+    <input type="text" formControlName="description" required />
+  </label>
+
+  <label>
+    Start Date
+    <input type="date" formControlName="startDate" required />
+  </label>
+
+  <label>
+    Status
+    <select formControlName="status">
+      <option value="Not Started">Not Started</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Completed">Completed</option>
+    </select>
+  </label>
+
+  <label>
+    Team Member
+    <input type="text" formControlName="teamMember" required />
+  </label>
+
+  <label>
+    Progress Note
+    <input type="text" formControlName="progressNote" />
+  </label>
+
+  <button type="submit">{{ projectId ? 'Update' : 'Save' }}</button>
+</form>
+
+<a routerLink="/projects">Back to Projects</a>
