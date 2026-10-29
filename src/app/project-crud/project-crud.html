@@ -1,19 +1,75 @@
 <h2>Project Progress Tracker - MongoDB</h2>
 
-<a routerLink="/projects/new">Add New Project</a>
+<h3>{{ editingId ? 'Edit Project' : 'Add New Project' }}</h3>
+
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+  <label>
+    Project Name
+    <input type="text" formControlName="projectName" required />
+  </label>
+
+  <label>
+    Description
+    <input type="text" formControlName="description" required />
+  </label>
+
+  <label>
+    Start Date
+    <input type="date" formControlName="startDate" required />
+  </label>
+
+  <label>
+    Status
+    <select formControlName="status">
+      <option value="Not Started">Not Started</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Completed">Completed</option>
+    </select>
+  </label>
+
+  <label>
+    Team Member
+    <input type="text" formControlName="teamMember" required />
+  </label>
+
+  <label>
+    Progress Note
+    <input type="text" formControlName="progressNote" />
+  </label>
+
+  <div class="form-buttons">
+    <button type="submit">{{ editingId ? 'Update' : 'Save' }}</button>
+    @if (editingId) {
+      <button type="button" (click)="resetForm()">Cancel</button>
+    }
+  </div>
+</form>
+
+<h3>All Projects</h3>
 
 @for (project of projects; track project._id) {
   <div class="project-card">
-    <h3>{{ project.projectName }}</h3>
-    <p><strong>Description:</strong> {{ project.description }}</p>
-    <p><strong>Start Date:</strong> {{ project.startDate }}</p>
+    <h4>{{ project.projectName }}</h4>
     <p><strong>Status:</strong> {{ project.status }}</p>
     <p><strong>Team Member:</strong> {{ project.teamMember }}</p>
-    <p><strong>Progress Note:</strong> {{ project.progressNote }}</p>
 
-    <button [routerLink]="['/projects/edit', project._id]">Edit</button>
+    <button (click)="onView(project._id)">View</button>
+    <button (click)="onEdit(project)">Edit</button>
     <button (click)="onDelete(project._id)">Delete</button>
   </div>
 } @empty {
   <p>No projects found.</p>
+}
+
+@if (selectedProject) {
+  <div class="details">
+    <h3>Project Details</h3>
+    <p><strong>Project Name:</strong> {{ selectedProject.projectName }}</p>
+    <p><strong>Description:</strong> {{ selectedProject.description }}</p>
+    <p><strong>Start Date:</strong> {{ selectedProject.startDate.substring(0, 10) }}</p>
+    <p><strong>Status:</strong> {{ selectedProject.status }}</p>
+    <p><strong>Team Member:</strong> {{ selectedProject.teamMember }}</p>
+    <p><strong>Progress Note:</strong> {{ selectedProject.progressNote }}</p>
+    <button (click)="selectedProject = null">Close</button>
+  </div>
 }

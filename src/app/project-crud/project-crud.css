@@ -1,0 +1,26 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.project-card {
+  margin-bottom: 12px;
+}
+
+.details {
+  margin-top: 20px;
+}
